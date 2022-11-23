@@ -20,35 +20,38 @@ void SpiralPath()
     int sy = 0; // смещение y
     Console.WriteLine($"mas[{y},{x}]");
     int countNum = 1;
+    mas[y,x] = countNum;
     bool stop;
+    int countCicle = 0;
     do 
     {
         stop = false;
         while(InRange(x+sx, y+sy, countNum ))
         {
-            mas[y,x] = countNum;
-            Console.WriteLine($"mas[{y},{x}]={countNum}");
             x+=sx;
             y+=sy;
             countNum++;
+            mas[y,x] = countNum;
+            Console.WriteLine($"mas[{y},{x}]={countNum}");
             stop = true;
         }
         int sx_old = sx;
         sx = -sy;
         sy = sx_old;
-        //Console.WriteLine($"countNum={countNum}");
+        countCicle++;
+        Console.WriteLine($"countCicle={countCicle}");
     }while(stop);
     
 }
-bool InRange(int x, int y, int count)
+bool InRange(int col, int row, int count)
 {
-    if(x < 0 || x >= N)
+    if(col < 0 || col >= N)
         return false;
-    if(y < 0 || y >= N)
+    if(row < 0 || row >= N)
         return false;
-    if(count > 16)
+    if(count > 20)
         return false;
-    if(mas[y,x]>0)
+    if(mas[row,col]>0)
         return false;
     return true;
 }
